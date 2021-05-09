@@ -1,0 +1,61 @@
+<h5 align="center" class="display-5 mb-5">{{title}}</h5>
+<div class="row card-deck text-center" style="max-width: 100%; margin: 0;">
+  <div *ngFor="let productInfo of page?.content" class="col-md-4 card-line">
+    <!-- bbb_deals -->
+    <div class="card-md-4 bbb_deals">
+      <div class="bbb_deals_slider_container">
+        <div class=" bbb_deals_item">
+          <div class="bbb_deals_image"><img src="{{productInfo.productIcon}}" width="208" height="208"
+              alt="{{productInfo.productName}}">
+          </div>
+          <div class="bbb_deals_content">
+            <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+              <!-- <div class="bbb_deals_item_category"><a href="#">Laptops</a></div> -->
+              <div class="bbb_deals_item_price_a ml-auto"><s>{{productInfo.productPrice +
+                  0.14*productInfo.productPrice | currency}}</s></div>
+            </div>
+            <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+              <div class="bbb_deals_item_name">{{productInfo.productName}}</div>
+              <div class="bbb_deals_item_price ml-auto">{{productInfo.productPrice | currency}}</div>
+            </div>
+            <div class="available">
+              <div class="available_line d-flex flex-row justify-content-start">
+                <div class="available_title">Available: <span>{{productInfo.productStock}}</span></div>
+                <div class="sold_stars ml-auto"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                    class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+              </div>
+              <div class="available_bar"><span style="width:17%"></span></div>
+            </div>
+            <br />
+            <a routerLink="/product/{{productInfo.productId}}" *ngIf="productInfo.productStatus == 0; else offBlock"
+              class="btn btn-warning btn-lg">Order Now</a>
+            <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Unavailable</a></ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+
+<!-- <div class="row card-deck text-center">
+  <div *ngFor="let productInfo of page?.content" class="col-lg-4 ">
+    <div class="card mb-4">
+      <img height="30%" class="card-img-top img-style" src="{{productInfo.productIcon}}"
+        alt="{{productInfo.productName}}">
+      <div class="card-body">
+        <h4 class="card-title ">{{productInfo.productName}}</h4>
+        <div class="text-left">
+          <p class="card-test">{{productInfo.productDescription}}</p>
+          <p class="card-text"><strong>Price: </strong>{{productInfo.productPrice | currency}}</p>
+          <p class="card-text"><strong>Available: </strong>{{productInfo.productStock}}</p>
+        </div>
+        <br>
+        <a routerLink="/product/{{productInfo.productId}}" *ngIf="productInfo.productStatus == 0; else offBlock"
+          class="btn btn-primary btn-lg">Get It!</a>
+        <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Unavailable</a></ng-template>
+      </div>
+    </div>
+  </div>
+</div> -->
+<app-pagination [currentPage]="page"></app-pagination>
